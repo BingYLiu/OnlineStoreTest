@@ -4,7 +4,7 @@
  
     <test name="anyname">
 	<classes>
-		<class name="PurchaseMagicMouseTest" />
+		<class name="OnlineStoreAutomation.PurchaseMagicMouseTest" />
 	</classes>
     </test>
   
