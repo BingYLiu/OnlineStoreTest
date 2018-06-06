@@ -76,9 +76,11 @@
 	<testng classpathref="test.path"
 		outputDir="${report.dir}"
 		haltOnFailure="true">
-		<classpath location=" refid="OnlineStoreTest.libclasspath" />
-		<classpath location=" refid="OnlineStoreTest.classpath" />
-		<classpath location=" refid="TestNG.libraryclasspath" />
+		<classpath>
+			<path refid="OnlineStoreTest.libclasspath" />
+			<path refid="OnlineStoreTest.classpath" />
+			<path refid="TestNG.libraryclasspath" />
+		<classpath />
 		<!-- Tell Ant where is testng.xml -->
 		<xmlfileset includes="testng.xml"/>
 
