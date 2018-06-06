@@ -71,7 +71,7 @@
         <fail message="Ivy has been installed. Run the build again"/>
     </target>
 
-  <target name="testng" depends="compile">
+  <target name="testng" depends="build">
 
 	<testng classpathref="test.path"
 		outputDir="${report.dir}"
