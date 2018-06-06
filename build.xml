@@ -63,7 +63,7 @@
              <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
          </ivy:cachepath>
 
-         <taskdef name="testng" classpathref="build.path" classname="org.testng.TestNGAntTask" />
+         <taskdef name="testng" classpathref="test.path" classname="org.testng.TestNGAntTask" />
     </target>
 
     <target name="install-ivy" description="Install ivy" unless="ivy.installed">
