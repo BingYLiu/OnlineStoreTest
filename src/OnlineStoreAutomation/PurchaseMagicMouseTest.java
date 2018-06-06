@@ -25,7 +25,7 @@ public class PurchaseMagicMouseTest {
 	@BeforeSuite
 	public void beforeSuiteSetup() {
 		System.out.println("Configure Suite");
-		System.setProperty("webdriver.gecko.driver", "E:\\Workspace\\Projects\\Tools\\GeckoDriver\\geckodriver.exe");
+		System.setProperty("webdriver.gecko.driver", "Tools\\geckodriver\\geckodriver.exe");
 	}
 
 	@BeforeTest
