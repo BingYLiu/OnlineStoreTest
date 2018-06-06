@@ -9,10 +9,10 @@
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
     <path id="TestNG.libraryclasspath">
-        <pathelement location="../../eclipse/plugins/org.testng_6.14.2.r201802161450.jar"/>
-        <pathelement location="../../eclipse/plugins/com.beust.jcommander_1.72.0.jar"/>
-        <pathelement location="../../eclipse/plugins/org.apache-extras.beanshell.bsh_2.0.0.b6.jar"/>
-        <pathelement location="../../eclipse/plugins/org.yaml.snakeyaml_1.17.0.jar"/>
+        <pathelement location="lib/Dependencies/org.testng_6.14.2.r201802161450.jar"/>
+        <pathelement location="lib/Dependencies/com.beust.jcommander_1.72.0.jar"/>
+        <pathelement location="lib/Dependencies/org.apache-extras.beanshell.bsh_2.0.0.b6.jar"/>
+        <pathelement location="lib/Dependencies/org.yaml.snakeyaml_1.17.0.jar"/>
     </path>
     <path id="OnlineStoreTest.classpath">
         <pathelement location="bin"/>
