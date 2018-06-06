@@ -81,7 +81,7 @@
 			<path refid="TestNG.libraryclasspath" />
 		</classpath>
 		<!-- Tell Ant where is testng.xml -->
-		<xmlfileset includes="testng.xml"/>
+		<xmlfileset dir="." includes="testng.xml"/>
 
 	</testng>
 
