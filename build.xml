@@ -44,4 +44,30 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	
+<taskdef name="testng" classname="org.testng.TestNGAntTask">
+	<classpath location="lib/org.testng-6.14.2.jar" />
+  </taskdef>
+	
+  <target name="testng" depends="compile">
+
+	<!-- Assume test.path contains the project library dependencies -->
+	<testng classpathref="test.path"
+		outputDir="${report.dir}" 
+		haltOnFailure="true">
+			
+		<!-- Extra project classpath, which is not included in above "test.path" -->
+		<!-- Tell Ant where is the project and test classes -->
+		<classpath location="${test.classes.dir}" />
+		<classpath location="${src.classes.dir}" />
+			
+		<!-- Tell Ant what test classes need to run -->
+		<classfileset dir="${test.classes.dir}" includes="**/*Test*.class" />
+			
+	</testng>
+
+  </target>
+	
 </project>
