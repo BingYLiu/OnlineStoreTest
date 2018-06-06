@@ -76,7 +76,7 @@
 
   <target name="testng" depends="build-testng">
 
-	<testng classpathref="test.path"
+	<testng classpathref="test.path" dir="bin"
 		outputDir="${report.dir}"
 		haltOnFailure="true">
 		<classpath>
