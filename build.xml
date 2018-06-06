@@ -25,11 +25,14 @@
         <pathelement location="lib/org.yaml.snakeyaml_1.17.0.jar"/>
     </path>
     <path id="OnlineStoreTest.classpath">
-        <pathelement location="bin"/>
+        <pathelement location="bin/SeleniumFixture"/>
         <path refid="TestNG.libraryclasspath"/>
         <pathelement location="lib/selenium-server-standalone-3.12.0.jar"/>
         <pathelement location="lib/client-combined-3.12.0.jar"/>
         <pathelement location="lib/client-combined-3.12.0-sources.jar"/>
+    </path>
+    <path id="test.path">
+        <pathelement location="bin/OnlineStoreAutomation"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -70,6 +73,8 @@
         <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
         <fail message="Ivy has been installed. Run the build again"/>
     </target>
+
+	<property name="report.dir" location="report" />
 
   <target name="testng" depends="build-testng">
 
