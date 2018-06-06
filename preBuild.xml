@@ -1,0 +1,36 @@
+<project name="demo" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <!--
+    ================
+    Build properties
+    ================
+    -->
+    <available classname="org.apache.ivy.Main" property="ivy.installed"/>
+
+    <!--
+    ==========
+    Build main
+    ==========
+    -->
+
+    <target name="build" depends="install-ivy">
+         <ivy:cachepath pathid="build.path">
+             <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
+         </ivy:cachepath>
+
+         <taskdef name="testng" classpathref="build.path" classname="org.testng.TestNGAntTask" />
+    </target>
+
+    <!--
+    ===========
+    Build setup
+    ===========
+    -->
+    <target name="install-ivy" description="Install ivy" unless="ivy.installed">
+        <mkdir dir="${user.home}/.ant/lib"/>
+        <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
+        <fail message="Ivy has been installed. Run the build again"/>
+    </target>
+
+
+</project>
