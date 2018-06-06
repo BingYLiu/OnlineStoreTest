@@ -3,7 +3,8 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="OnlineStoreTest">
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="OnlineStoreTest" xmlns:ivy="antlib:org.apache.ivy.ant">
     <property environment="env"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
@@ -45,21 +46,57 @@
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
 
+
+
+
+    <!--
+    ================
+    Build properties
+    ================
+    -->
+    <available classname="org.apache.ivy.Main" property="ivy.installed"/>
+
+    <!--
+    ==========
+    Build main
+    ==========
+    -->
+
+    <target name="build" depends="install-ivy">
+         <ivy:cachepath pathid="build.path">
+             <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
+         </ivy:cachepath>
+
+         <taskdef name="testng" classpathref="build.path" classname="org.testng.TestNGAntTask" />
+    </target>
+
+    <!--
+    ===========
+    Build setup
+    ===========
+    -->
+    <target name="install-ivy" description="Install ivy" unless="ivy.installed">
+        <mkdir dir="${user.home}/.ant/lib"/>
+        <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
+        <fail message="Ivy has been installed. Run the build again"/>
+    </target>
+
+
   <taskdef name="testng" classname="org.testng.TestNGAntTask">
 	<classpath location="lib/testng_6.14.2.jar" />
   </taskdef>
-	
+
   <target name="testng" depends="compile">
 
 	<testng classpathref="test.path"
-		outputDir="${report.dir}" 
+		outputDir="${report.dir}"
 		haltOnFailure="true">
-			
+
 		<classpath location="${test.classes.dir}" />
-			
+
 		<!-- Tell Ant where is testng.xml -->
 		<xmlfileset dir="${resources.dir}" includes="testng.xml"/>
-			
+
 	</testng>
 
   </target>
