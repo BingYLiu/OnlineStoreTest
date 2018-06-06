@@ -26,13 +26,11 @@
     </path>
     <path id="OnlineStoreTest.classpath">
         <pathelement location="bin/SeleniumFixture"/>
+        <pathelement location="bin/OnlineStoreAutomation"/>
         <path refid="TestNG.libraryclasspath"/>
         <pathelement location="lib/selenium-server-standalone-3.12.0.jar"/>
         <pathelement location="lib/client-combined-3.12.0.jar"/>
         <pathelement location="lib/client-combined-3.12.0-sources.jar"/>
-    </path>
-    <path id="test.path">
-        <pathelement location="bin/OnlineStoreAutomation"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -61,7 +59,7 @@
     <available classname="org.apache.ivy.Main" property="ivy.installed"/>
 
     <target name="build-testng" depends="install-ivy">
-         <ivy:cachepath pathid="build.path">
+         <ivy:cachepath pathid="test.path">
              <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
          </ivy:cachepath>
 
