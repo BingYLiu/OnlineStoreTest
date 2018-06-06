@@ -80,7 +80,7 @@
 			<path refid="OnlineStoreTest.libclasspath" />
 			<path refid="OnlineStoreTest.classpath" />
 			<path refid="TestNG.libraryclasspath" />
-		<classpath />
+		</classpath>
 		<!-- Tell Ant where is testng.xml -->
 		<xmlfileset includes="testng.xml"/>
 
