@@ -50,7 +50,7 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}" classpathref="OnlineStoreTest.classpath">
             <src path="src"/>
-            <classpath refid="OnlineStoreTest.classpath"/>
+            <classpath refid="OnlineStoreTest.libclasspath"/>
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
