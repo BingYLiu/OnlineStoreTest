@@ -47,7 +47,7 @@
          <ivy:cachepath pathid="test.path">
              <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
          	 <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="3.12.0" conf="default"/>
-         	 <dependency org="org.seleniumhq.selenium" name="selenium-serve" rev="3.12.0" conf="default"/>
+         	 <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="3.12.0" conf="default"/>
          </ivy:cachepath>
 
          <taskdef name="testng" classpathref="test.path" classname="org.testng.TestNGAntTask" />
