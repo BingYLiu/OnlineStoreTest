@@ -29,7 +29,10 @@
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project,testng" name="build"/>
     <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
+	
+	
+	
+    <target depends="build-dependency" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
@@ -40,7 +43,7 @@
 
     <available classname="org.apache.ivy.Main" property="ivy.installed"/>
 
-    <target name="build-testng" depends="install-ivy">
+    <target name="build-dependency" depends="install-ivy,init">
          <ivy:cachepath pathid="test.path">
              <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
          	 <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="3.12.0" conf="default"/>
@@ -58,7 +61,7 @@
 
 	<property name="report.dir" location="report" />
 
-  <target name="testng" depends="build-testng">
+  <target name="testng" depends="build-dependency">
 
 	<testng classpathref="test.path"
 		outputDir="${report.dir}"
