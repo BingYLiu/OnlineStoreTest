@@ -20,12 +20,13 @@
     </target>
     
     <target name="clean">
+    	<echo message="cleaning bin"/>
         <delete dir="bin"/>
     </target>
     
     <target depends="clean" name="cleanall"/>
     
-    <target depends="build-project,testng" name="build"/>
+    <target depends="testng" name="build"/>
 	
     <available classname="org.apache.ivy.Main" property="ivy.installed"/>
     
@@ -55,7 +56,7 @@
 
 	<property name="report.dir" location="test-output" />
 
-  	<target name="testng" depends="build-dependency">
+  	<target name="testng" depends="build-project">
 		<testng classpathref="dependencies.path"
 		configFailurePolicy="continue"
 		outputDir="${report.dir}"

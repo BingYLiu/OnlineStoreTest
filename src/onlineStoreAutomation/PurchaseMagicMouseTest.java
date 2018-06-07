@@ -69,7 +69,7 @@ public class PurchaseMagicMouseTest {
 
 		// Ensure Checkout Page is correct
 		CheckoutPage cp = new CheckoutPage(driver).get();
-		assertTrue(cp.getQuantity("Magic Mouse") == 1, "Item quantity is incorrect in Checkout");
+		assertTrue(cp.getQuantity("Magic Mouse") == 2, "Item quantity is incorrect in Checkout");
 
 		// Ensure I can continue to billing info page
 		cp.clickContinueButton();
