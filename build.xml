@@ -68,6 +68,8 @@
 		haltOnFailure="true">
 		<classpath>
 			<path refid="dependencies.path" />
+			<path refid="TestNG.libraryclasspath" />
+			<path refid="OnlineStoreTest.classpath" />
 		</classpath>
 		<xmlfileset dir="." includes="testng.xml"/>
 
