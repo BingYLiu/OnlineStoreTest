@@ -9,7 +9,7 @@
         <pathelement location="bin"/>
     </path>
     
-    <target name="init">
+    <target name="init" depends="cleanall">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
