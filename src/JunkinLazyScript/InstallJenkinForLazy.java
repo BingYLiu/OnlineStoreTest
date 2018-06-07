@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
@@ -15,7 +16,7 @@ public class InstallJenkinForLazy {
 	
 	@DataProvider(name = "JenkinData")
 	public static Object[][] userInfo() {
-		return new Object[][] { { "http://localhost:8080", "6cf8a1d4fd8f474dbc56c7068005b770","Admin","Admin","DemoAdmin","something@email.com","C:\\Program Files\\Java\\jdk1.8.0_92"} };
+		return new Object[][] { { "http://localhost:8080", "141730f797f84037b78b3f1ef7a13deb","Admin","Admin","DemoAdmin","something@email.com","C:\\Program Files\\Java\\jdk1.8.0_92"} };
 	}
 
 	@Test(dataProvider = "JenkinData")
@@ -24,17 +25,21 @@ public class InstallJenkinForLazy {
 		driver.get(url);
 		driver.findElement(By.id("security-token")).sendKeys(initAdminPass);
 		driver.findElement(By.cssSelector("[type ='submit']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//b[text() = 'Install suggested plugins']")));
 		driver.findElement(By.xpath(".//b[text() = 'Install suggested plugins']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//b[text() = 'Install suggested plugins']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'Continue as admin')]")));
+		driver.findElement(By.xpath(".//*[contains(text() , 'Continue as admin')]")).click();
+		driver.findElement(By.xpath(".//button[contains(text() , 'Start using Jenkins')]")).click();
+		/*
 		driver.findElement(By.id("username")).sendKeys(userName);
 		driver.findElement(By.xpath(".//*[@name = 'password1']")).sendKeys(password);
 		driver.findElement(By.xpath(".//*[@name = 'password2']")).sendKeys(password);
 		driver.findElement(By.xpath(".//*[@name = 'fullname']")).sendKeys(name);
 		driver.findElement(By.xpath(".//*[@name = 'email']")).sendKeys(email);
 		driver.findElement(By.xpath(".//button[contains(@text , 'Save and Finish')]")).click();
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//button[contains(text() , 'Start using Jenkins')]")));
-		driver.findElement(By.xpath(".//button[contains(text() , 'Start using Jenkins')]")).click();
+		*/
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//a[contains(text() , 'Manage Jenkins')]")));
 		if(driver.findElements(By.xpath(".//*[text()='DISABLE AUTO REFRESH']")).size()>0)
 		{
@@ -42,7 +47,10 @@ public class InstallJenkinForLazy {
 		}
 		driver.findElement(By.xpath(".//a[contains(text() , 'Manage Jenkins')]")).click();
 		driver.findElement(By.xpath(".//dt[contains(text() , 'Global Tool Configuration')]")).click();
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'JDK installations'")));
 		driver.findElement(By.xpath(".//*[contains(text() , 'JDK installations')]")).click();
+		
 		driver.findElement(By.xpath(".//*[@checkurl='/descriptorByName/hudson.model.JDK/checkName']")).sendKeys("JDK");
 		driver.findElement(By.xpath(".//*[@checkurl='/descriptorByName/hudson.model.JDK/checkName']/ancestor::table[1]//input[@name='hudson-tools-InstallSourceProperty']")).click();
 		driver.findElement(By.xpath(".//*[@checkurl='/descriptorByName/hudson.model.JDK/checkHome']")).sendKeys(jdkPath);
@@ -88,7 +96,7 @@ public class InstallJenkinForLazy {
 			System.setProperty("webdriver.gecko.driver", "Tools/geckodriver/geckodriver");
 		}
 		this.driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(30000000, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		this.wait = new WebDriverWait(driver,3000000);
 	}
 }
