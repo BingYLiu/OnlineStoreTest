@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestAll">
+<suite name="OnlineStoreTestSuite">
  
-    <test name="anyname">
+    <test name="Purchase Magic Mouse Test">
 	<classes>
 		<class name="OnlineStoreAutomation.PurchaseMagicMouseTest" />
 	</classes>
