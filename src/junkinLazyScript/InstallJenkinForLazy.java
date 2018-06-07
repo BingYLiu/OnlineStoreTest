@@ -1,4 +1,4 @@
-package JunkinLazyScript;
+package junkinLazyScript;
 
 import java.util.concurrent.TimeUnit;
 

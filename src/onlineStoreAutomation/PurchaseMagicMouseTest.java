@@ -1,13 +1,15 @@
-package OnlineStoreAutomation;
+package onlineStoreAutomation;
 
 import org.testng.annotations.Test;
-import SeleniumFixture.*;
+
+import seleniumFixture.*;
 
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 public class PurchaseMagicMouseTest {
@@ -20,7 +22,7 @@ public class PurchaseMagicMouseTest {
 	}
 
 	@BeforeSuite
-	public void beforeSuiteSetup() {
+	public void beforeSuiteSetup(ITestContext context) {
 		System.out.println("Configure Suite");
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.indexOf("win") >= 0) {
@@ -29,12 +31,13 @@ public class PurchaseMagicMouseTest {
 		{
 			System.setProperty("webdriver.gecko.driver", "Tools/geckodriver/geckodriver");
 		}
+		this.driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		context.setAttribute("WebDriver", driver);
 	}
 
 	@BeforeTest
 	public void beforeTest() {
-		this.driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get("http://store.demoqa.com/");
 	}
 
@@ -68,7 +71,7 @@ public class PurchaseMagicMouseTest {
 
 		// Ensure Checkout Page is correct
 		CheckoutPage cp = new CheckoutPage(driver).get();
-		assertTrue(cp.getQuantity("Magic Mouse") == 1, "Item quantity is incorrect in Checkout");
+		assertTrue(cp.getQuantity("Magic Mouse") == 2, "Item quantity is incorrect in Checkout");
 
 		// Ensure I can continue to billing info page
 		cp.clickContinueButton();

@@ -1,4 +1,4 @@
-package SeleniumFixture;
+package seleniumFixture;
 
 import static org.testng.Assert.assertTrue;
 
