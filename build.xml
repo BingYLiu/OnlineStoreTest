@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. -->
 <project basedir="." default="build" name="OnlineStoreTest" xmlns:ivy="antlib:org.apache.ivy.ant">
     <property environment="env"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
-    <path id="TestNG.libraryclasspath">
-    </path>
+    
     <path id="OnlineStoreTest.classpath">
         <pathelement location="bin"/>
     </path>
+    
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
@@ -23,27 +18,24 @@
             </fileset>
         </copy>
     </target>
+    
     <target name="clean">
         <delete dir="bin"/>
     </target>
+    
     <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project,testng" name="build"/>
-    <target name="build-subprojects"/>
+    
+    <target depends="build-project,testng" name="build"/>
 	
-	
-	
-    <target depends="build-dependency" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="dependencies.path"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-
     <available classname="org.apache.ivy.Main" property="ivy.installed"/>
-
-    <target name="build-dependency" depends="install-ivy,init">
+    
+    <target name="install-ivy" description="Install ivy" unless="ivy.installed">
+        <mkdir dir="${user.home}/.ant/lib"/>
+        <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
+        <fail message="Ivy has been installed. Run the build again"/>
+    </target>
+	
+	<target name="build-dependency" depends="install-ivy,init">
          <ivy:cachepath pathid="dependencies.path">
              <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
          	 <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="3.12.0" conf="default"/>
@@ -52,28 +44,27 @@
 
          <taskdef name="testng" classpathref="dependencies.path" classname="org.testng.TestNGAntTask" />
     </target>
-
-    <target name="install-ivy" description="Install ivy" unless="ivy.installed">
-        <mkdir dir="${user.home}/.ant/lib"/>
-        <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
-        <fail message="Ivy has been installed. Run the build again"/>
+	
+    <target depends="build-dependency" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="dependencies.path"/>
+        </javac>
     </target>
 
-	<property name="report.dir" location="report" />
+	<property name="report.dir" location="test-output" />
 
-  <target name="testng" depends="build-dependency">
-
-	<testng classpathref="dependencies.path"
+  	<target name="testng" depends="build-dependency">
+		<testng classpathref="dependencies.path"
+		configFailurePolicy="continue"
 		outputDir="${report.dir}"
 		haltOnFailure="true">
 		<classpath>
 			<path refid="dependencies.path" />
-			<path refid="TestNG.libraryclasspath" />
 			<path refid="OnlineStoreTest.classpath" />
 		</classpath>
 		<xmlfileset dir="." includes="testng.xml"/>
-
-	</testng>
-
-  </target>
+		</testng>
+  	</target>
 </project>

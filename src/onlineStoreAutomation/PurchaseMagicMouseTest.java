@@ -1,11 +1,8 @@
 package onlineStoreAutomation;
 
 import org.testng.annotations.Test;
-
 import seleniumFixture.*;
-
 import static org.testng.Assert.assertTrue;
-
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,7 +22,6 @@ public class PurchaseMagicMouseTest {
 
 	@BeforeSuite
 	public void beforeSuiteSetup(ITestContext context) {
-		System.out.println("Configure Suite");
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.indexOf("win") >= 0) {
 			System.setProperty("webdriver.gecko.driver", "Tools\\geckodriver\\geckodriver.exe");
@@ -73,7 +69,7 @@ public class PurchaseMagicMouseTest {
 
 		// Ensure Checkout Page is correct
 		CheckoutPage cp = new CheckoutPage(driver).get();
-		assertTrue(cp.getQuantity("Magic Mouse") == 2, "Item quantity is incorrect in Checkout");
+		assertTrue(cp.getQuantity("Magic Mouse") == 1, "Item quantity is incorrect in Checkout");
 
 		// Ensure I can continue to billing info page
 		cp.clickContinueButton();
