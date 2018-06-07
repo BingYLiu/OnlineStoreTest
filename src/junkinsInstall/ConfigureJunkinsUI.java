@@ -1,4 +1,4 @@
-package junkinLazyScript;
+package junkinsInstall;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 
 
-public class InstallJenkinForLazy {
+public class ConfigureJunkinsUI {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	
