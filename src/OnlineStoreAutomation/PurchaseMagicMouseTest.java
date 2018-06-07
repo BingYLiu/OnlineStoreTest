@@ -27,7 +27,7 @@ public class PurchaseMagicMouseTest {
 			System.setProperty("webdriver.gecko.driver", "Tools\\geckodriver\\geckodriver.exe");
 		}else if(os.indexOf("mac") >= 0)
 		{
-			System.setProperty("webdriver.gecko.driver", "Tools\\geckodriver\\geckodriver");
+			System.setProperty("webdriver.gecko.driver", "Tools/geckodriver/geckodriver");
 		}
 	}
 
