@@ -36,7 +36,7 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
-            <classpath refid="OnlineStoreTest.classpath"/>
+            <classpath refid="dependencies.path"/>
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
@@ -44,13 +44,13 @@
     <available classname="org.apache.ivy.Main" property="ivy.installed"/>
 
     <target name="build-dependency" depends="install-ivy,init">
-         <ivy:cachepath pathid="test.path">
+         <ivy:cachepath pathid="dependencies.path">
              <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
          	 <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="3.12.0" conf="default"/>
          	 <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="3.12.0" conf="default"/>
          </ivy:cachepath>
 
-         <taskdef name="testng" classpathref="test.path" classname="org.testng.TestNGAntTask" />
+         <taskdef name="testng" classpathref="dependencies.path" classname="org.testng.TestNGAntTask" />
     </target>
 
     <target name="install-ivy" description="Install ivy" unless="ivy.installed">
@@ -63,12 +63,11 @@
 
   <target name="testng" depends="build-dependency">
 
-	<testng classpathref="test.path"
+	<testng classpathref="dependencies.path"
 		outputDir="${report.dir}"
 		haltOnFailure="true">
 		<classpath>
-			<path refid="test.path" />
-			<path refid="TestNG.libraryclasspath" />
+			<path refid="dependencies.path" />
 		</classpath>
 		<xmlfileset dir="." includes="testng.xml"/>
 
