@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+@Listeners(utility.Listener.class)
+
 public class PurchaseMagicMouseTest {
 	private WebDriver driver;
 

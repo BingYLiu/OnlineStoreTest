@@ -49,22 +49,20 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		String timeStamp;
 		File ssName;
 		WebDriver driver = (WebDriver)result.getTestContext().getAttribute("WebDriver");
 		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		// TODO Auto-generated method stub
-		timeStamp = Calendar.getInstance().getTime().toString();
-		ssName = new File("test-output\\Screenshots\\"+timeStamp+".pgn");
+		ssName = new File("test-output\\Screenshots\\"+srcFile.getName());
+
 		try {
+			ssName.createNewFile();
 			FileUtils.copyFile(srcFile, ssName);
 		}catch (Exception e)
 		{
 			Reporter.log("Unable to take screenshot due to "+ e.getMessage());
 			return;
 		}
-		String filePath = ssName.toString();
-		String path = "<img src=\""+filePath+"\" alt=\""+timeStamp+".pgn\">";
+		String path = "<img src=\""+ssName.getAbsolutePath()+"\" alt=\""+result.getTestName()+"\">";
 		Reporter.log(path);
 	}
 

@@ -10,6 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+
 public class InstallJenkinForLazy {
 	private WebDriver driver;
 	private WebDriverWait wait;
@@ -20,13 +25,20 @@ public class InstallJenkinForLazy {
 	}
 
 	@Test(dataProvider = "JenkinData")
-	public void installJenkins(String url,String initAdminPass, String userName, String password, String name, String email,String jdkPath) {
+	public void installJenkins(String url,String initAdminPass, String userName, String password, String name, String email,String jdkPath) throws Exception {
 		//open url
+		String homepath = System.getProperty("user.home");
+		File adminPass = new File(homepath + File.separator+".jenkins"+File.separator+"secrets"+File.separator+"initialAdminPassword");
+		FileReader fr = new FileReader(adminPass);
+		BufferedReader br = new BufferedReader(fr);
+		initAdminPass = br.readLine().trim();
+		System.out.println(initAdminPass);
 		driver.get(url);
 		driver.findElement(By.id("security-token")).sendKeys(initAdminPass);
 		driver.findElement(By.cssSelector("[type ='submit']")).click();
 		driver.findElement(By.xpath(".//b[text() = 'Install suggested plugins']")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'Continue as admin')]")));
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//*[contains(text() , 'Continue as admin')]")).click();
 		driver.findElement(By.xpath(".//button[contains(text() , 'Start using Jenkins')]")).click();
 		/*
@@ -48,8 +60,9 @@ public class InstallJenkinForLazy {
 		driver.findElement(By.xpath(".//a[contains(text() , 'Manage Jenkins')]")).click();
 		driver.findElement(By.xpath(".//dt[contains(text() , 'Global Tool Configuration')]")).click();
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'JDK installations'")));
-		driver.findElement(By.xpath(".//*[contains(text() , 'JDK installations')]")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'Add JDK'")));
+		Thread.sleep(1000);
+		driver.findElement(By.xpath(".//*[contains(text() , 'Add JDK')]")).click();
 		
 		driver.findElement(By.xpath(".//*[@checkurl='/descriptorByName/hudson.model.JDK/checkName']")).sendKeys("JDK");
 		driver.findElement(By.xpath(".//*[@checkurl='/descriptorByName/hudson.model.JDK/checkName']/ancestor::table[1]//input[@name='hudson-tools-InstallSourceProperty']")).click();
