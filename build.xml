@@ -59,7 +59,7 @@
 		<testng classpathref="dependencies.path"
 		configFailurePolicy="continue"
 		outputDir="${report.dir}"
-		haltOnFailure="true">
+		haltOnFailure="false">
 		<classpath>
 			<path refid="dependencies.path" />
 			<path refid="OnlineStoreTest.classpath" />
