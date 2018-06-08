@@ -50,7 +50,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 		File ssName;
 		WebDriver driver = (WebDriver)result.getTestContext().getAttribute("WebDriver");
 		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String folderPath = "test-output"+File.separator+result.getTestContext().getSuite().getName()+File.separator+"screenshots"+File.separator;
+		String folderPath = result.getTestContext().getSuite().getName()+File.separator+"screenshots"+File.separator;
 		ssName = new File(folderPath+srcFile.getName());
 
 		try {
@@ -62,7 +62,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 			Reporter.log("Unable to take screenshot due to "+ e.getMessage()+"; File Path: "+ ssName.getAbsolutePath());
 			return;
 		}
-		String path = "<img src=\""+ssName.getAbsolutePath()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
+		String path = "<img src=\""+ssName.getPath()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
 		Reporter.log(path);
 	}
 

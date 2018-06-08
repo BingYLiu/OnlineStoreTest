@@ -80,9 +80,9 @@ public class ConfigureJunkinsUI {
 		driver.findElement(By.xpath(".//*[contains(text() , 'Manage Plugins')]")).click();
 		driver.findElement(By.xpath(".//*[contains(text() , 'Available')]")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , '.NET')]")));
-		driver.findElement(By.id("filter-box")).sendKeys("testNG");
+		driver.findElement(By.id("filter-box")).sendKeys("HTML Publisher");
 		Thread.sleep(1000);
-		driver.findElement(By.xpath(".//*[contains(@name , 'TestNG Results')]//*[@type = 'checkbox']")).click();
+		driver.findElement(By.xpath(".//*[contains(@name , 'HTML Publisher')]//*[@type = 'checkbox']")).click();
 		driver.findElement(By.xpath(".//*[contains(text() , 'Install without restart')]")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'TestNG Results')]/..//*[contains(text(), 'Success')]")));
 		driver.findElement(By.xpath(".//*[contains(text() , 'Back to Dashboard')]")).click();
@@ -107,8 +107,16 @@ public class ConfigureJunkinsUI {
 		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		
 		driver.findElement(By.xpath(".//*[contains(text() , 'Add post-build action')]")).click();
-		driver.findElement(By.xpath(".//*[contains(text() , 'Publish TestNG Results')]")).click();
+		driver.findElement(By.xpath(".//*[contains(text() , 'Publish HTML reports')]")).click();
 		Thread.sleep(1000);
+		
+		driver.findElement(By.xpath(".//*[text()='Reports']/..//button[text()='Add']")).click();
+		driver.findElement(By.xpath(".//*[@name = '_.reportDir']")).sendKeys("test-output");
+		
+		driver.findElement(By.xpath(".//*[text()='Publishing options...']]")).click();
+		driver.findElement(By.xpath(".//*[@name = '_.keppAll']")).click();
+		driver.findElement(By.xpath(".//*[@name = '_.alwaysLinkToLastBuild']")).click();
+		
 		driver.findElement(By.xpath(".//*[contains(text() , 'Save')]")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//*[contains(text() , 'Build Now')]")).click();
