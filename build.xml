@@ -4,11 +4,17 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
-    
+	<property name="aspectj.version" value="1.7.4"/>
+	<property name = "lib.dir" value="${basedir}/lib" />
+	
     <path id="OnlineStoreTest.classpath">
         <pathelement location="bin"/>
     </path>
     
+    <path id="lib.dir">
+        <pathelement location="lib"/>
+    </path>
+	
     <target name="init" depends="cleanall">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
@@ -34,14 +40,9 @@
         <mkdir dir="${user.home}/.ant/lib"/>
         <get dest="${user.home}/.ant/lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
     </target>
-	
-	<target name="build-dependency" depends="install-ivy,init">
-         <ivy:cachepath pathid="dependencies.path">
-             <dependency org="org.testng" name="testng" rev="6.11" conf="default"/>
-         	 <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="3.12.0" conf="default"/>
-         	 <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="3.12.0" conf="default"/>
-         </ivy:cachepath>
 
+	<target name="build-dependency" depends="install-ivy,init">
+         <ivy:retrieve pathid="dependencies.path"/>
          <taskdef name="testng" classpathref="dependencies.path" classname="org.testng.TestNGAntTask" />
     </target>
 	
@@ -60,6 +61,7 @@
 		configFailurePolicy="continue"
 		outputDir="${report.dir}"
 		haltOnFailure="false">
+		<jvmarg value="-javaagent:${lib.dir}/aspectjweaver-${aspectj.version}.jar"/>
 		<classpath>
 			<path refid="dependencies.path" />
 			<path refid="OnlineStoreTest.classpath" />
