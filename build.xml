@@ -43,7 +43,6 @@
 
 	<target name="build-dependency" depends="install-ivy,init">
          <ivy:retrieve pathid="dependencies.path"/>
-         <taskdef name="testng" classpathref="dependencies.path" classname="org.testng.TestNGAntTask" />
     </target>
 	
     <target depends="build-dependency" name="build-project">
@@ -57,6 +56,7 @@
 	<property name="report.dir" location="test-output" />
 
   	<target name="testng" depends="build-project">
+        <taskdef name="testng" classpathref="dependencies.path" classname="org.testng.TestNGAntTask" />
 		<testng classpathref="dependencies.path"
 		configFailurePolicy="continue"
 		outputDir="${report.dir}"
