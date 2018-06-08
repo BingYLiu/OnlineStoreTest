@@ -50,9 +50,11 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 		File ssName;
 		WebDriver driver = (WebDriver)result.getTestContext().getAttribute("WebDriver");
 		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		ssName = new File("test-output\\Screenshots\\"+srcFile.getName());
+		String folderPath = "test-output"+File.separator+result.getInstanceName()+File.separator+"screenshots"+File.separator;
+		ssName = new File(folderPath+srcFile.getName());
 
 		try {
+			ssName.getParentFile().mkdirs();
 			ssName.createNewFile();
 			FileUtils.copyFile(srcFile, ssName);
 		}catch (Exception e)
