@@ -63,6 +63,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 			return;
 		}
 		String path = "<img src=\""+ssName.getPath()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
+		System.out.println("SS store in "+ path);
 		Reporter.log(result.getAttribute("description").toString());
 		Reporter.log(path);
 	}
