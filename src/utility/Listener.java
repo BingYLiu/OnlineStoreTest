@@ -47,11 +47,12 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 
 	@Override
 	public void onTestFailure(ITestResult result) {
+		String outputFolder = "test-output"+File.separator;
 		File ssName;
 		WebDriver driver = (WebDriver)result.getTestContext().getAttribute("WebDriver");
 		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String folderPath = "test-output"+File.separator+result.getTestContext().getSuite().getName()+File.separator+"screenshots"+File.separator;
-		ssName = new File(folderPath+srcFile.getName());
+		String folderPath = result.getTestContext().getSuite().getName()+File.separator+"screenshots"+File.separator;
+		ssName = new File(outputFolder+folderPath+srcFile.getName());
 
 		try {
 			ssName.getParentFile().mkdirs();
@@ -62,7 +63,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 			Reporter.log("Unable to take screenshot due to "+ e.getMessage()+"; File Path: "+ ssName.getAbsolutePath());
 			return;
 		}
-		String path = "<img src=\""+ssName.getPath()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
+		String path = "<img src=\""+folderPath+srcFile.getName()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
 		System.out.println("SS store in "+ ssName.getPath());
 		Reporter.log(result.getThrowable().getMessage().toString());
 		Reporter.log(path);
