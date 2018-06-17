@@ -18,6 +18,7 @@ public class TestBase {
 		FirefoxOptions ffOptions = (FirefoxOptions)context.getSuite().getAttribute("FirefoxOption");
 		this.driver = new FirefoxDriver(ffOptions);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		context.setAttribute("WebDriver", driver);
 		driver.get("http://store.demoqa.com/");
 	}
 

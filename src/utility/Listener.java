@@ -101,7 +101,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 	public void onTestFailure(ITestResult result) {
 		String outputFolder = "test-output"+File.separator;
 		File ssName;
-		WebDriver driver = (WebDriver)result.getTestContext().getSuite().getAttribute("WebDriver");
+		WebDriver driver = (WebDriver)result.getTestContext().getAttribute("WebDriver");
 		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String folderPath = result.getTestContext().getSuite().getName()+File.separator+"screenshots"+File.separator;
 		ssName = new File(outputFolder+folderPath+srcFile.getName());
