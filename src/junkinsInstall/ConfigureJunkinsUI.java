@@ -21,7 +21,7 @@ public class ConfigureJunkinsUI {
 	
 	@DataProvider(name = "JenkinData")
 	public static Object[][] userInfo() {
-		return new Object[][] { { "http://localhost:8080", "141730f797f84037b78b3f1ef7a13deb","Admin","Admin","DemoAdmin","something@email.com","C:\\Program Files\\Java\\jdk1.8.0_92"} };
+		return new Object[][] { { "http://localhost:8080", "141730f797f84037b78b3f1ef7a13deb","Admin","Admin","DemoAdmin","something@email.com","/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home"} };
 	}
 
 	@Test(dataProvider = "JenkinData")
@@ -84,7 +84,7 @@ public class ConfigureJunkinsUI {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(".//*[contains(@name , 'HTML Publisher')]//*[@type = 'checkbox']")).click();
 		driver.findElement(By.xpath(".//*[contains(text() , 'Install without restart')]")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'TestNG Results')]/..//*[contains(text(), 'Success')]")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[contains(text() , 'HTML Publisher')]/..//*[contains(text(), 'Success')]")));
 		driver.findElement(By.xpath(".//*[contains(text() , 'Back to Dashboard')]")).click();
 		
 		driver.findElement(By.xpath(".//*[contains(text() , 'New Item')]")).click();
