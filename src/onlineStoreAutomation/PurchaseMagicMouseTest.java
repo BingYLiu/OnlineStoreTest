@@ -2,7 +2,7 @@ package onlineStoreAutomation;
 
 import org.testng.annotations.Test;
 import seleniumFixture.*;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -104,7 +104,8 @@ public class PurchaseMagicMouseTest {
 
 		// Ensure Checkout Page is correct
 		CheckoutPage cp = new CheckoutPage(driver).get();
-		assertTrue(cp.getQuantity("Magic Mouse") == 2, "Item quantity is incorrect in Checkout");
+		assertEquals(cp.getQuantity("Magic Mouse"),2,"Item quantity is incorrect in Checkout");
+
 
 		// Ensure I can continue to billing info page
 		cp.clickContinueButton();
