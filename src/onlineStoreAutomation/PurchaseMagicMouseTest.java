@@ -3,9 +3,18 @@ package onlineStoreAutomation;
 import org.testng.annotations.Test;
 import seleniumFixture.*;
 import static org.testng.Assert.assertTrue;
+
+import java.io.File;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
@@ -21,7 +30,30 @@ public class PurchaseMagicMouseTest {
 	}
 
 	@BeforeSuite
-	public void beforeSuiteSetup(ITestContext context) {
+	public void beforeSuiteSetup(ITestContext context) throws Exception {
+		//setup firefox profile
+	    FirefoxBinary firefoxBinary = new FirefoxBinary();
+	    //firefoxBinary.addCommandLineOptions("--headless");
+
+		//setup Logs
+		String outputFolder = "test-output"+File.separator;
+		String folderPath = context.getSuite().getName()+File.separator+"logs"+File.separator;
+		File ffLog = new File(outputFolder+folderPath+"firefoxLog.txt");
+		ffLog.getParentFile().mkdirs();
+		ffLog.createNewFile();
+		File selLog = new File(outputFolder+folderPath+"seleniumLog.txt");
+		selLog.createNewFile();
+		System.setProperty("webdriver.log.file", selLog.getPath());
+		System.setProperty("webdriver.firefox.logfile", ffLog.getPath());
+		LoggingPreferences logs = new LoggingPreferences();
+		logs.enable(LogType.DRIVER, Level.ALL);
+		logs.enable(LogType.BROWSER, Level.ALL);
+		
+		FirefoxOptions firefoxOption = new FirefoxOptions();
+		firefoxOption.setCapability(CapabilityType.LOGGING_PREFS, logs);
+		firefoxOption.setBinary(firefoxBinary);
+		
+		//OS base geckodriver
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.indexOf("win") >= 0) {
 			System.setProperty("webdriver.gecko.driver", "Tools\\geckodriver\\geckodriver.exe");
@@ -29,9 +61,12 @@ public class PurchaseMagicMouseTest {
 		{
 			System.setProperty("webdriver.gecko.driver", "Tools/geckodriver/geckodriver");
 		}
-		this.driver = new FirefoxDriver();
+		
+		
+		this.driver = new FirefoxDriver(firefoxOption);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		context.setAttribute("WebDriver", driver);
+		
 	}
 
 	@BeforeTest
@@ -69,7 +104,7 @@ public class PurchaseMagicMouseTest {
 
 		// Ensure Checkout Page is correct
 		CheckoutPage cp = new CheckoutPage(driver).get();
-		assertTrue(cp.getQuantity("Magic Mouse") == 2, "Item quantity is incorrect in Checkout");
+		assertTrue(cp.getQuantity("Magic Mouse") == 1, "Item quantity is incorrect in Checkout");
 
 		// Ensure I can continue to billing info page
 		cp.clickContinueButton();

@@ -36,7 +36,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 	@Override
 	public void onTestStart(ITestResult result) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -64,7 +64,6 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 			return;
 		}
 		String path = "<img src=\""+folderPath+srcFile.getName()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
-		System.out.println("SS store in "+ ssName.getPath());
 		Reporter.log(result.getThrowable().getMessage().toString());
 		Reporter.log(path);
 	}
