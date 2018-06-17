@@ -5,6 +5,7 @@
     <test name="Purchase Magic Mouse Test">
 	<classes>
 		<class name="onlineStoreAutomation.PurchaseMagicMouseTest" />
+		<class name="onlineStoreAutomation.PurchaseMagicMouseTest2" />
 	</classes>
     </test>
   

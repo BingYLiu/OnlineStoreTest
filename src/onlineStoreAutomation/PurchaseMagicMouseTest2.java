@@ -9,7 +9,8 @@ import org.testng.annotations.*;
 
 @Listeners(utility.Listener.class)
 
-public class PurchaseMagicMouseTest extends TestBase {
+public class PurchaseMagicMouseTest2 extends TestBase {
+
 
 	@DataProvider(name = "DummyData")
 	public static Object[][] userInfo() {
@@ -17,11 +18,11 @@ public class PurchaseMagicMouseTest extends TestBase {
 				"Ontario", "Canada", "M3M 1C1", "3735928559" } };
 	}
 
+	
 	@Test(description = "Varify I can Purchase a magic mouse with valid user infos", dataProvider = "DummyData")
 	public void ContinueCheckout(String email, String firstName, String lastName, String address, String city,
 			String province, String country, String postCode, String phone) {
 		WebDriver driver = getWebDriver();
-		
 		// Ensure Home Page is displayed
 		new HomePage(driver).get();
 		assertTrue(driver.getTitle().contains("ONLINE STORE"), "Unable to Load Home Page");
@@ -43,7 +44,7 @@ public class PurchaseMagicMouseTest extends TestBase {
 
 		// Ensure Checkout Page is correct
 		CheckoutPage cp = new CheckoutPage(driver).get();
-		assertEquals(cp.getQuantity("Magic Mouse"),1,"Item quantity is incorrect in Checkout");
+		assertEquals(cp.getQuantity("Magic Mouse"),2,"Item quantity is incorrect in Checkout");
 
 
 		// Ensure I can continue to billing info page
