@@ -30,7 +30,14 @@
         <delete dir="bin"/>
     </target>
     
-    <target depends="clean" name="cleanall"/>
+    <target depends="clean" name="cleanall">
+    	<echo message="cleaning lib"/>
+        <delete dir="lib"/>
+        <echo message="cleaning allure report"/>
+        <delete dir="target"/>
+        <echo message="cleaning ngtest output"/>
+        <delete dir="test-output"/>
+    </target>
     
     <target depends="testng" name="build"/>
 	
