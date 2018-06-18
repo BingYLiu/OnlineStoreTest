@@ -7,7 +7,6 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-@Listeners(utility.Listener.class)
 
 public class PurchaseMagicMouseTest2 extends TestBase {
 
@@ -19,8 +18,8 @@ public class PurchaseMagicMouseTest2 extends TestBase {
 	}
 
 	
-	@Test(description = "Varify I can Purchase a magic mouse with valid user infos", dataProvider = "DummyData")
-	public void ContinueCheckout(String email, String firstName, String lastName, String address, String city,
+	@Test(description = "Varify I can Purchase a magic mouse with valid user infos and it will fail", dataProvider = "DummyData")
+	public void ContinueCheckout2(String email, String firstName, String lastName, String address, String city,
 			String province, String country, String postCode, String phone) {
 		WebDriver driver = getWebDriver();
 		// Ensure Home Page is displayed

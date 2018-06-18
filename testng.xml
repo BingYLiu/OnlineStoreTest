@@ -2,11 +2,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="OnlineStoreTestSuite">
  
-    <test name="Purchase Magic Mouse Test">
+    <test name="Purchase Magic Mouse Test Pass">
 	<classes>
 		<class name="onlineStoreAutomation.PurchaseMagicMouseTest" />
+	</classes>
+    </test>
+    
+    <test name="Purchase Magic Mouse Test Fail">
+	<classes>
 		<class name="onlineStoreAutomation.PurchaseMagicMouseTest2" />
 	</classes>
     </test>
+    
   
 </suite>

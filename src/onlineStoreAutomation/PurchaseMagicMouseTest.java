@@ -7,8 +7,6 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-@Listeners(utility.Listener.class)
-
 public class PurchaseMagicMouseTest extends TestBase {
 
 	@DataProvider(name = "DummyData")
