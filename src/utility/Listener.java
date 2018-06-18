@@ -115,7 +115,7 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 			Reporter.log("Unable to take screenshot due to "+ e.getMessage()+"; File Path: "+ ssName.getAbsolutePath());
 			return;
 		}
-		String path = "<img src=\""+srcFile.getName()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
+		String path = "<img src=\""+folderPath+srcFile.getName()+"\" alt=\""+result.getMethod().getMethodName()+"\">";
 		Reporter.log(result.getThrowable().getMessage().toString());
 		Reporter.log(path);
 	}
